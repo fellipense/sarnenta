@@ -1,4 +1,4 @@
 function love.conf(t)
-    t.window.title = "Serene"
-    t.window.icon = "sprites/ship.png"
+    t.window.title = "Sarnenta"
+    t.window.icon = "sarnenta-icon.png"
 end
