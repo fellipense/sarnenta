@@ -4,6 +4,8 @@ function newAnimator(parent, default)
     animator.parent = parent
     animator.animations = {}
     animator.currentAnimation = default
+    
+    -- INITIALIZING COUNTERS
     animator.timer = 0
     animator.step = 1
 
@@ -12,10 +14,11 @@ function newAnimator(parent, default)
         self.animations[name].frames = {}
         self.animations[name].fps = fps
 
+        -- INSERT FRAMES IN THE ANIMATION
         for i=1,frames do
             table.insert(
                 self.animations[name].frames,
-                love.graphics.newImage(path .. "Sprite-" .. i .. ".png")
+                love.graphics.newImage(path .. "sprite-" .. i .. ".png")
             )
         end
     end
@@ -27,15 +30,21 @@ function newAnimator(parent, default)
     end
     
     animator.update = function(self, deltaTime)
+
+        -- INCREMENTS ANIMATION TIME
         self.timer = self.timer + deltaTime
+
+        -- GETS THE CURRENT ANIMATION
         local currentAnimation = self.animations[self.currentAnimation]
         local frames = #currentAnimation.frames
         local fps = currentAnimation.fps
 
+        -- TRIGGER THE "START" EVENT WHEN THE ANIMATION STARTS
         if self.step == 1 then
             self.event = self.currentAnimation.."-start"
         end
 
+        -- TRIGGER THE "END" EVENT WHEN THE ANIMATION ENDS
         if self.timer >= 1/fps then
             self.step = self.step + 1
             if self.step > frames then
@@ -45,6 +54,7 @@ function newAnimator(parent, default)
             self.timer = 0
         end
 
+        -- SET THE ANIMATION FRAME TO THE OBJECTS'S SPRITE
         self.parent.sprite = currentAnimation.frames[self.step]
     end
 

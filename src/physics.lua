@@ -1,6 +1,7 @@
 require("functions")
 
 function newCircleCollider(parent, radius, xOffset, yOffset, z)
+
     local circleCollider = {}
     circleCollider.parent = parent
     circleCollider.xOffset = xOffset or 0
@@ -12,6 +13,7 @@ function newCircleCollider(parent, radius, xOffset, yOffset, z)
     circleCollider.globalY = parent.transform.y + circleCollider.yOffset
 
     circleCollider.draw = function(self, mode)
+
         love.graphics.setColor(0, 1, 0)
         love.graphics.circle(mode or "line", 
             self.globalX,
@@ -23,17 +25,21 @@ function newCircleCollider(parent, radius, xOffset, yOffset, z)
         for i,o in ipairs(gameObjects) do
 
             if o.rectangleCollider ~= nil then
-                local closePoint = {}
+
+                local closePoint = {} -- BETWEEN THE CIRCLE AND THE RECTANGLE
+
                 closePoint.x = clamp(
                     o.rectangleCollider.globalX,
                     o.rectangleCollider.globalX + o.rectangleCollider.width,
                     self.globalX
                 )
+
                 closePoint.y = clamp(
                     o.rectangleCollider.globalY,
                     o.rectangleCollider.globalY + o.rectangleCollider.height,
                     self.globalY
                 )
+                
                 love.graphics.line(
                     self.globalX, self.globalY, 
                     closePoint.x, closePoint.y
@@ -43,14 +49,18 @@ function newCircleCollider(parent, radius, xOffset, yOffset, z)
     end
 
     circleCollider.update = function(self, deltaTime)
+
+        -- DEFINING IT'S POSITION
         self.globalX = parent.transform.x + circleCollider.xOffset
         self.globalY = parent.transform.y + circleCollider.yOffset
+
     end
 
     return circleCollider
 end
 
 function newRectangleCollider(parent, width, height, xOffset, yOffset, z)
+
     local rectangleCollider = {}
     rectangleCollider.parent = parent
     rectangleCollider.xOffset = xOffset or 0
@@ -63,6 +73,7 @@ function newRectangleCollider(parent, width, height, xOffset, yOffset, z)
     rectangleCollider.globalY = parent.transform.y + rectangleCollider.yOffset
 
     rectangleCollider.draw = function(self, mode)
+
         love.graphics.setColor(0, 1, 0)
         love.graphics.rectangle(mode or "line", 
             self.globalX,
@@ -74,6 +85,8 @@ function newRectangleCollider(parent, width, height, xOffset, yOffset, z)
     end
 
     rectangleCollider.update = function(self, deltaTime)
+
+        -- DEFINING IT'S POSITION
         self.globalX = parent.transform.x + rectangleCollider.xOffset
         self.globalY = parent.transform.y + rectangleCollider.yOffset
     end
@@ -89,7 +102,8 @@ function checkCircleToCircleCollision(a, b)
 end
 
 function checkCircleToRectangleCollision(a, b)
-    local closerPoint = {}
+
+    local closerPoint = {} --BETWEEN THE CIRCLE AND RECTANGLE
 
     closerPoint.x = clamp(
         b.globalX,
