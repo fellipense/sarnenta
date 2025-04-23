@@ -1,7 +1,5 @@
 require("classes/GameObject")
-require("classes/Projectile")
 require("classes/Animator")
-require("classes/Enemy")
 
 require("game")
 require("sarnenta")
@@ -86,7 +84,7 @@ function love.draw()
 
 	-- DRAWING EVERY OBJECTS
 	for i,s in ipairs(gameObjects) do
-		s:draw(mode)
+		s:draw()
 	end
 	
 	--DEBUG MODE

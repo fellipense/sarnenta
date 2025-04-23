@@ -18,6 +18,10 @@ function clamp(min, max, value)
     end
 end
 
+function ternary(condition, trueValue, falseValue)
+    if condition then return trueValue else return falseValue end
+end
+
 -- LOGGING (for some reasons it didn't work in an exclusive file. I will se it later)
 function log()
     for i,o in ipairs(gameObjects) do

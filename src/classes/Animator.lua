@@ -55,7 +55,7 @@ function newAnimator(parent, default)
         end
 
         -- SET THE ANIMATION FRAME TO THE OBJECTS'S SPRITE
-        self.parent.sprite = currentAnimation.frames[self.step]
+        self.parent.sprite.image = currentAnimation.frames[self.step]
     end
 
     return animator
