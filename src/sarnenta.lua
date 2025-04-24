@@ -4,7 +4,7 @@ require("input")
 require("physics")
 
 playerScreenPadding = 20
-sprite = "sprites/sarnenta/sprite-1.png"
+sprite = "sprites/sarnenta/idle/sprite-1.png"
 
 sarnenta = newGameObject(
     "sarnenta", -- NAME
@@ -22,13 +22,28 @@ sarnenta.sprite.offsetY = sarnenta.yPivot *-1
 sarnenta.rectangleCollider = newRectangleCollider(sarnenta, 30, 20, -15, -10)
 sarnenta.destroyIt = false
 sarnenta.animator = newAnimator(sarnenta, "idle")
-sarnenta.animator:addAnimation("idle", "sprites/sarnenta/", 11, 10)
+sarnenta.animator:addAnimation("idle", "sprites/sarnenta/idle/", 11, 10)
+sarnenta.animator:addAnimation("walking", "sprites/sarnenta/walking/", 4, 10)
 
 sarnenta.transform.y = sarnenta.transform.y - sarnenta.sprite.image:getHeight()
 
 sarnenta.update = function(self, deltaTime)
 
     --INPUT SYSTEM
+	if input.left or input.right then
+		if sarnenta.animator.currentAnimation ~= "walking" then
+			sarnenta.animator:playAnimation("walking")
+		end
+	else
+		sarnenta.animator:playAnimation("idle")
+	end
+	if input.left then
+		sarnenta.sprite.flipX = true
+	end
+	if input.right then
+		sarnenta.sprite.flipX = false
+	end
+
 
     -- MOVE, BUT NOT AFTER RIGHT
     if input.left and not checkRectangleToBoundaryCollision(self.rectangleCollider, "left") then
