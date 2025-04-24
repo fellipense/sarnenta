@@ -27,6 +27,13 @@ function love.update(deltaTime)
 		fps = math.floor(1 / deltaTime);
 	end
 
+	if input.left then
+		sarnenta.sprite.flipX = true
+	end
+	if input.right then
+		sarnenta.sprite.flipX = false
+	end
+
 	-- DEBUG TOGGLER
 	if input.press.debug then
 		input.press.debug = false
@@ -75,6 +82,7 @@ function love.draw()
 	-- GETTING SCREEN DIMENSIONS
 	width = love.graphics.getWidth()
 	height = love.graphics.getHeight()
+
 
 	-- DRAWING BACKGROUND
 	love.graphics.draw(background, 0, 0, 0,

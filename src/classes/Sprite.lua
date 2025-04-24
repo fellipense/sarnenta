@@ -17,8 +17,8 @@ function newSprite(parent, imagePath, s, x, y, r)
     sprite.draw = function(self)
         love.graphics.draw(
             self.image,
-            self.parent.transform.x + self.offsetX, 
-            self.parent.transform.y + self.offsetY, 
+            self.parent.transform.x + ternary(self.flipX, self.offsetX *-1, self.offsetX), 
+            self.parent.transform.y + ternary(self.flipY, self.offsetY *-1, self.offsetY), 
             self.parent.transform.r + self.offsetR,
             ternary(self.flipX, -1, 1),
             ternary(self.flipY, -1, 1)       
