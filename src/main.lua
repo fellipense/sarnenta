@@ -8,11 +8,11 @@ require("functions")
 require("physics")
 require("input")
 
-audio1 = love.audio.newSource("audio/C418-Aria_Math.mp3", "stream")
+-- audio1 = love.audio.newSource("audio/C418-Aria_Math.mp3", "stream")
 background = love.graphics.newImage("sprites/background/sky1.png")
 
 function love.load()
-	love.audio.play(audio1)
+	-- love.audio.play(audio1)
 	addGameObject(sarnenta)
 end
 

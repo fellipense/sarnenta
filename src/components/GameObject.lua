@@ -10,6 +10,10 @@ function newGameObject(name, x, y, z, r, size)
     gameObject.transform = newTransform(x, y, z, r, size)
     gameObject.components = {}
 
+    gameObject.addComponent = function(self, component)
+        table.insert(self.components, component)
+    end
+
     return gameObject
 end
 
