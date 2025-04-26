@@ -1,5 +1,5 @@
-require("classes/GameObject")
-require("classes/Sprite")
+require("components/GameObject")
+require("components/Sprite")
 require("input")
 require("physics")
 

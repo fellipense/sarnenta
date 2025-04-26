@@ -1,4 +1,4 @@
-require("../functions")
+require("functions")
 
 function newSprite(parent, imagePath, s, x, y, r)
 

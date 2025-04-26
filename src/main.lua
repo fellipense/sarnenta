@@ -1,8 +1,9 @@
-require("classes/GameObject")
-require("classes/Animator")
+require("components/GameObject")
+require("components/Animator")
 
-require("game")
-require("sarnenta")
+require("objects/game")
+require("objects/sarnenta")
+
 require("functions")
 require("physics")
 require("input")
@@ -22,7 +23,7 @@ function love.update(deltaTime)
 	-- RANDOMIZING SEED
 	math.randomseed(os.time() + elapsedTime)
 
-	-- CALCULATIONG FPS
+	-- CALCULATING FPS
 	if elapsedTime + deltaTime > math.ceil(elapsedTime) then 
 		fps = math.floor(1 / deltaTime);
 	end

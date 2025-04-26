@@ -1,4 +1,4 @@
-require("classes/Transform")
+require("components/Transform")
 function newGameObject(name, x, y, z, r, size)
     
     local gameObject = {}
@@ -8,9 +8,7 @@ function newGameObject(name, x, y, z, r, size)
     gameObject.display = true
     gameObject.destroyIt = false
     gameObject.transform = newTransform(x, y, z, r, size)
-    gameObject.update = function(deltaTime) 
-        return true
-    end
+    gameObject.components = {}
 
     return gameObject
 end
