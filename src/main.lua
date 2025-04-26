@@ -38,29 +38,9 @@ function love.update(deltaTime)
 	input.update(deltaTime)
 
 	-- UPDATING ALL OBJECTS
-	for i,s in ipairs(gameObjects) do
-		s:update(deltaTime)
+	for i,o in ipairs(gameObjects) do
+		o:update(deltaTime)
 	end	
-
-	-- CALCULATING ALL PHYSICS
-	for i,s in ipairs(gameObjects) do
-		
-		if s.rectangleCollider ~= nil then
-			s.rectangleCollider:update(deltaTime)
-		end
-
-		if s.circleCollider ~= nil then
-			s.circleCollider:update(deltaTime)
-		end
-	end
-
-	-- ANIMATING ALL ANIMATORS
-	for i,s in ipairs(gameObjects) do
-	
-		if s.animator ~= nil then
-			s.animator:update(deltaTime)
-		end
-	end
 
 	-- DESTROING ALL DESTROYABLES
 	for i,s in ipairs(gameObjects) do

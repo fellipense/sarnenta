@@ -14,6 +14,12 @@ function newGameObject(name, x, y, z, r, size)
         table.insert(self.components, component)
     end
 
+    gameObject.update = function(self, deltaTime)
+        for i,c in ipairs(self.components) do
+            c:update(deltaTime)
+        end
+    end
+
     return gameObject
 end
 
