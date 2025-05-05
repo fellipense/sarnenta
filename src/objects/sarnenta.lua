@@ -1,5 +1,6 @@
 require("components/GameObject")
 require("components/Sprite")
+require("components/Collider")
 require("input")
 require("physics")
 
@@ -19,7 +20,7 @@ sarnenta.xPivot = sarnenta.sprite.image:getWidth()/2
 sarnenta.yPivot = sarnenta.sprite.image:getHeight()/2
 sarnenta.sprite.offsetX = sarnenta.xPivot *-1
 sarnenta.sprite.offsetY = sarnenta.yPivot *-1
-sarnenta.rectangleCollider = newRectangleCollider(sarnenta, 30, 20, -15, -10)
+sarnenta.rectangleCollider = newCollider(sarnenta, "rectangle", 30, 20, -15, -10)
 sarnenta.destroyIt = false
 sarnenta.animator = newAnimator(sarnenta, "idle")
 sarnenta.animator:addAnimation("idle", "sprites/sarnenta/idle/", 11, 10)
@@ -28,6 +29,7 @@ sarnenta.animator:addAnimation("walking", "sprites/sarnenta/walking/", 4, 10)
 sarnenta.transform.y = sarnenta.transform.y - sarnenta.sprite.image:getHeight()
 
 sarnenta.update = function(self, deltaTime)
+    sarnenta.rectangleCollider:update()
 
     --INPUT SYSTEM
 	if input.left or input.right then
@@ -46,12 +48,12 @@ sarnenta.update = function(self, deltaTime)
 
 
     -- MOVE, BUT NOT AFTER RIGHT
-    if input.left and not checkRectangleToBoundaryCollision(self.rectangleCollider, "left") then
+    if input.left and not checkRecToBoundCol(self.rectangleCollider, "left") then
         sarnenta.transform.x = sarnenta.transform.x - sarnenta.speed * deltaTime
     end
 
     -- MOVE, BUT NOT AFTER LEFT
-    if input.right and not checkRectangleToBoundaryCollision(self.rectangleCollider, "right") then
+    if input.right and not checkRecToBoundCol(self.rectangleCollider, "right") then
         sarnenta.transform.x = sarnenta.transform.x + sarnenta.speed * deltaTime
     end
 

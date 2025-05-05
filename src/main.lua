@@ -17,7 +17,7 @@ function love.load()
 end
 
 function love.update(deltaTime)
-	
+
 	elapsedTime = elapsedTime + deltaTime
 
 	-- RANDOMIZING SEED

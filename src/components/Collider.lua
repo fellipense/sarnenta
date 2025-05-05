@@ -50,7 +50,7 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
             
             for i,o in ipairs(gameObjects) do
                 for j,c in ipairs(o.components) do
-                    if c.name == "component:collider" And c.type == "rectangle" then
+                    if c.name == "component:collider" and c.type == "rectangle" then
                         local closePoint = {} -- BETWEEN THE CIRCLE AND THE RECTANGLE
 
                         closePoint.x = clamp(
@@ -95,8 +95,8 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
                     -- RECTANGLE TO RECTANGLE
                     if self.type == "rectangle" 
-                    And c.type == "rectangle" 
-                    And checkRecToRecCol(self, c) then
+                    and c.type == "rectangle" 
+                    and checkRecToRecCol(self, c) then
 
                         -- EACH COLLISIONS
                         for k,l in ipairs(self.collisions) do
@@ -112,8 +112,8 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
                     -- CIRCLE TO RECTANGLE
                     if self.type == "circle" 
-                    And c.type == "rectangle" 
-                    And checkCircToRecCol(self, c) then
+                    and c.type == "rectangle" 
+                    and checkCircToRecCol(self, c) then
 
                         -- EACH COLLISIONS
                         for k,l in ipairs(self.collisions) do
@@ -129,8 +129,8 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
                     -- CIRCLE TO CIRCLE
                     if self.type == "circle" 
-                    And c.type == "cirlce" 
-                    And checkCircToCircCol(self, c) then
+                    and c.type == "cirlce" 
+                    and checkCircToCircCol(self, c) then
 
                         -- EACH COLLISIONS
                         for k,l in ipairs(self.collisions) do
