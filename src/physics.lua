@@ -1,13 +1,15 @@
 require("functions")
 
-function checkCircleToCircleCollision(a, b)
+-- Circle to circle collision
+function checkCircToCircCol(a, b)
 
     return (a.globalX - b.globalX)^2 + 
         (a.globalY - b.globalY)^2 < 
         (a.radius + b.radius)^2
 end
 
-function checkCircleToRectangleCollision(a, b)
+-- Circle to rectangle collision
+function checkCircToRecCol(a, b)
 
     local closerPoint = {} --BETWEEN THE CIRCLE AND RECTANGLE
 
@@ -28,7 +30,8 @@ function checkCircleToRectangleCollision(a, b)
         (a.radius)^2
 end
 
-function checkRectangleToRectangleCollision(a, b)
+-- Rectangle to rectangle collision
+function checkRecToRecCol(a, b)
 
     return a.globalY < b.globalY + b.height
         and a.globalX + a.width > b.globalX
@@ -36,7 +39,8 @@ function checkRectangleToRectangleCollision(a, b)
         and a.globalX < b.globalX + b.width
 end
 
-function checkCircleToBoundaryCollision(a, b)
+-- Circle to boundary collision
+function checkCircToBoundCol(a, b)
 
     if b == "top" and a.globalY < a.radius then
         return true
@@ -55,7 +59,8 @@ function checkCircleToBoundaryCollision(a, b)
     end
 end
 
-function checkRectangleToBoundaryCollision(a, b)
+-- Rectangle to boundary collision
+function checkRecToBoundCol(a, b)
 
     if b == "top" and a.globalY < 0 then
         return true
@@ -72,4 +77,18 @@ function checkRectangleToBoundaryCollision(a, b)
     if b == "left" and a.globalX < 0 then
         return true
     end
+end
+
+function newCollision(target, state)
+
+    local collision = {}
+
+    collision.target = target or nil
+    collision.state = state or nil
+    -- STATES:
+        -- 0: Collision enter
+        -- 1: Ongoing Collision
+        -- 2: Collision Exit
+
+    return collision
 end
