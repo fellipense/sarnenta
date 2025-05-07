@@ -46,27 +46,18 @@ sarnenta.update = function(self, deltaTime)
 		sarnenta.sprite.flipX = false
 	end
 
-
     -- MOVE, BUT NOT AFTER RIGHT
     if input.left and not checkRecToBoundCol(self.rectangleCollider, "left") then
         sarnenta.transform.x = sarnenta.transform.x - sarnenta.speed * deltaTime
     end
 
-    -- MOVE, BUT NOT AFTER LEFT
+    -- MOVE, BUT NOT BEFORE LEFT
     if input.right and not checkRecToBoundCol(self.rectangleCollider, "right") then
         sarnenta.transform.x = sarnenta.transform.x + sarnenta.speed * deltaTime
-    end
-
-    -- ACTION
-    if input.press.action then
-        input.press.action = false
     end
 end
 
 sarnenta.draw = function(mode)
-    
-    if not sarnenta.display then return nil end
-
     sarnenta.sprite:draw()
 
     if drawColliders then

@@ -77,7 +77,9 @@ function love.draw()
 
 	-- DRAWING EVERY OBJECTS
 	for i,s in ipairs(gameObjects) do
-		s:draw()
+		if s.display then
+			s:draw()
+		end
 	end
 	
 	--DEBUG MODE
