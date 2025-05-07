@@ -11,6 +11,9 @@ require("input")
 -- audio1 = love.audio.newSource("audio/C418-Aria_Math.mp3", "stream")
 background = love.graphics.newImage("sprites/background/sky1.png")
 
+-- PHYSICS EVENT CHAIN
+pec = {}
+
 function love.load()
 	-- love.audio.play(audio1)
 	addGameObject(sarnenta)
@@ -41,6 +44,14 @@ function love.update(deltaTime)
 	for i,o in ipairs(gameObjects) do
 		o:update(deltaTime)
 	end	
+
+	-- EXECUTING PHYSICS CONSEQUENCES
+	for i,event in ipairs(pec) do
+		event()
+	end	
+
+	-- RESTARTING PEC
+	pec = {}
 
 	-- DESTROING ALL DESTROYABLES
 	for i,s in ipairs(gameObjects) do
