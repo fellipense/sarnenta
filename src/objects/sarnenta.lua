@@ -20,7 +20,13 @@ sarnenta.xPivot = sarnenta.sprite.image:getWidth()/2
 sarnenta.yPivot = sarnenta.sprite.image:getHeight()/2
 sarnenta.sprite.offsetX = sarnenta.xPivot *-1
 sarnenta.sprite.offsetY = sarnenta.yPivot *-1
-sarnenta.rectangleCollider = newCollider(sarnenta, "rectangle", 30, 20, -15, -10)
+sarnenta.rectangleCollider = newCollider(sarnenta, 
+    "rectangle", 
+    sarnenta.sprite.image:getWidth(), 
+    sarnenta.sprite.image:getHeight(),   
+    sarnenta.sprite.image:getWidth()/2 * -1,
+    sarnenta.sprite.image:getHeight()/2 * -1    
+)
 sarnenta.destroyIt = false
 sarnenta.animator = newAnimator(sarnenta, "idle")
 sarnenta.animator:addAnimation("idle", "sprites/sarnenta/idle/", 11, 10)
@@ -30,6 +36,7 @@ sarnenta.transform.y = sarnenta.transform.y - sarnenta.sprite.image:getHeight()
 
 sarnenta.update = function(self, deltaTime)
     sarnenta.rectangleCollider:update()
+    sarnenta.animator:update(deltaTime)
 
     --INPUT SYSTEM
 	if input.left or input.right then
