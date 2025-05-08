@@ -5,6 +5,7 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
     local collider = {}
     collider.name = "component:collider"
+
     collider.parent = parent
     collider.xOffset = xOffset or 0
     collider.yOffset = yOffset or 0

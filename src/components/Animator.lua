@@ -1,5 +1,7 @@
 function newAnimator(parent, default)
+
     local animator = {}
+    animator.name = "component:animator"
 
     animator.parent = parent
     animator.animations = {}

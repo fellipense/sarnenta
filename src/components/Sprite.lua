@@ -3,7 +3,8 @@ require("functions")
 function newSprite(parent, imagePath, s, x, y, r)
 
     sprite = {}
-
+    sprite.name = "component:sprite"
+    
     sprite.parent = parent
     sprite.image = love.graphics.newImage(imagePath);
 
