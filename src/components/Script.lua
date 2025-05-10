@@ -6,7 +6,7 @@ function newScript(updateScript)
     script.updateScript = updateScript or nil
 
     script.update = function(self, deltaTime)
-        updateScript()
+        self.updateScript(deltaTime)
     end
 
     return script
