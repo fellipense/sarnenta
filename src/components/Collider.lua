@@ -13,9 +13,9 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
     collider.collisions = {}
 
-    collider.onColEnter = function(self, target) return true end
-    collider.onCol = function(self, target) return true end
-    collider.onColOut = function(self, target) return true end
+    collider.onColEnter = function(self, target) return end
+    collider.onColStay = function(self, target) return end
+    collider.onColOut = function(self, target) return end
 
     if type == "rectangle" then
         collider.width = width or parent.width or 10

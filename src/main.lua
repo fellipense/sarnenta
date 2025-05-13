@@ -1,6 +1,3 @@
-require("components/GameObject")
-require("components/Animator")
-
 require("objects/game")
 require("objects/sarnenta")
 

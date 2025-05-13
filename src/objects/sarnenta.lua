@@ -1,4 +1,5 @@
 require("components/GameObject")
+require("components/Animator")
 require("components/Script")
 require("components/Sprite")
 require("components/Collider")
@@ -6,10 +7,10 @@ require("input")
 require("physics")
 
 sarnenta = newGameObject(
-    "sarnenta",                -- NAME
-    0,                         -- X 
+    "sarnenta",                      -- NAME
+    0,                               -- X 
     love.graphics.getHeight() - 100, -- Y 
-    1, 0, 1                    -- Z, R, SIZE
+    1, 0, 1                          -- Z, R, SIZE
 )
 
 local sprite = "sprites/sarnenta/idle/sprite-1.png"
