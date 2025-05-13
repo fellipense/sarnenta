@@ -1,7 +1,6 @@
 function newScript(updateScript)
 
-    local script = {}
-    script.name = "component:script"
+    local script = newComponent("script")
 
     script.updateScript = updateScript or nil
 

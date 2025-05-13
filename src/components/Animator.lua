@@ -1,7 +1,8 @@
+require("components/Component")
+
 function newAnimator(parent, default)
 
-    local animator = {}
-    animator.name = "component:animator"
+    local animator = newComponent("animator")
 
     animator.parent = parent
     animator.animations = {}

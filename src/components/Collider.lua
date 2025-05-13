@@ -1,10 +1,10 @@
+require("components/Component")
 require("functions")
 require("physics")
 
 function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
-    local collider = {}
-    collider.name = "component:collider"
+    local collider = newComponent("collider")
 
     collider.parent = parent
     collider.xOffset = xOffset or 0
@@ -29,7 +29,7 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
     collider.globalX = parent.transform.x + collider.xOffset
     collider.globalY = parent.transform.y + collider.yOffset
 
-    collider.draw = function(self, mode)
+    collider.selfDraw = function(self, mode)
 
         love.graphics.setColor(0, 1, 0)
 

@@ -8,7 +8,7 @@ require("physics")
 sarnenta = newGameObject(
     "sarnenta",                -- NAME
     0,                         -- X 
-    love.graphics.getHeight(), -- Y 
+    love.graphics.getHeight() - 100, -- Y 
     1, 0, 1                    -- Z, R, SIZE
 )
 
@@ -29,15 +29,24 @@ animator:addAnimation("walking", "sprites/sarnenta/walking/", 4, 10)
 
 local fullCollider = newCollider(sarnenta, 
     "rectangle", 
-    sarnenta.sprite.image:getWidth(), 
-    sarnenta.sprite.image:getHeight(),   
-    sarnenta.sprite.image:getWidth()/2 * -1,
-    sarnenta.sprite.image:getHeight()/2 * -1    
+    sarnenta.sprite.image:getWidth(),        -- WIDTH
+    sarnenta.sprite.image:getHeight(),       -- HEIGHT 
+    sarnenta.sprite.image:getWidth()/2 * -1, -- X OFFSET
+    sarnenta.sprite.image:getHeight()/2 * -1 -- Y OFFSET   
+)
+
+local footCollider = newCollider(sarnenta,
+    "rectangle",
+    sarnenta.sprite.image:getWidth(),        -- WIDTH
+    10,                                      -- HEIGHT 
+    sarnenta.sprite.image:getWidth()/2 * -1, -- X OFFSET
+    sarnenta.sprite.image:getHeight()/2      -- Y OFFSET   
 )
 
 -- INSERTING COMPONENTS
-table.insert(sarnenta.components, animator)
-table.insert(sarnenta.components, fullCollider)
+sarnenta:addComponent(animator)
+sarnenta:addComponent(fullCollider)
+sarnenta:addComponent(footCollider)
 
 -- SCRIPTS
 table.insert(sarnenta.components, 
@@ -76,7 +85,7 @@ table.insert(sarnenta.components,
 )
 
 
-sarnenta.draw = function(self, mode)
+sarnenta.selfDraw = function(self, mode)
    
     love.graphics.draw(sarnenta.sprite.image,
 

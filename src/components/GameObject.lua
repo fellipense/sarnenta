@@ -9,6 +9,7 @@ function newGameObject(name, x, y, z, r, size)
     gameObject.destroyIt = false
     gameObject.transform = newTransform(x, y, z, r, size)
     gameObject.components = {}
+    gameObject.selfDraw = function() return end
 
     gameObject.addComponent = function(self, component)
         table.insert(self.components, component)
@@ -18,6 +19,19 @@ function newGameObject(name, x, y, z, r, size)
         for i,c in ipairs(self.components) do
             print("updating" .. c.name)
             c:update(deltaTime)
+        end
+    end
+
+    gameObject.draw = function(self, component)
+        
+        if self.display then
+            self:selfDraw()
+        end
+
+        if debug then
+            for i,c in ipairs(self.components) do
+                c:selfDraw()
+            end
         end
     end
 

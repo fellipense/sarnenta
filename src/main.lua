@@ -84,9 +84,6 @@ function love.draw()
 	
 	--DEBUG MODE
 	if debug then
-		drawColliders = true
 		log()
-	else
-		drawColliders = false
 	end
 end

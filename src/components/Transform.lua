@@ -1,7 +1,6 @@
 function newTransform(x, y, z, r, size)
 
-    local transform = {}
-    transform.name = "component:transform"
+    local transform = newComponent("transform")
     
     transform.x = x or 0;
     transform.y = y or 0;

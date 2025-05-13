@@ -2,8 +2,7 @@ require("functions")
 
 function newSprite(imagePath, s, x, y, r)
 
-    sprite = {}
-    sprite.name = "component:sprite"
+    sprite = newComponent("sprite")
     
     sprite.image = love.graphics.newImage(imagePath);
 
