@@ -120,7 +120,6 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
                 -- Never collided before? So create a new collision
                 if checkCol(self, c) then
-                    print("a")
                     self:addCol(newCollision(c, 0))
                 end
 
