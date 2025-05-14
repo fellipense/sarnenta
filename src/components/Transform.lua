@@ -1,3 +1,5 @@
+require("components/Component")
+
 function newTransform(x, y, z, r, size)
 
     local transform = newComponent("transform")

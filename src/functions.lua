@@ -3,6 +3,10 @@ function addGameObject(obj)
     table.sort(gameObjects, compareByZ)
 end
 
+function addPhysicEvent(event)
+    table.insert(pec, event)
+end
+
 -- ORDER ITENS BASED ON IT'S Z LAYER
 function compareByZ(a, b)
     return a.transform.z < b.transform.z
@@ -27,6 +31,10 @@ function log()
     for i,o in ipairs(gameObjects) do
 
         if o.transform == nil then goto continue end
+
+        love.graphics.setColor(1,0,0)
+        love.graphics.circle("line", o.transform.x, o.transform.y, 10)
+        love.graphics.setColor(1,1,1)
 
         -- OBJECT'S NAME
         love.graphics.print(o.name, o.transform.x, o.transform.y -35)

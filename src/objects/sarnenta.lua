@@ -36,13 +36,18 @@ local fullCollider = newCollider(sarnenta,
     sarnenta.sprite.image:getHeight()/2 * -1 -- Y OFFSET   
 )
 
+fullCollider.onColEnter = function() print("Enter") end
+--fullCollider.onColStay = function() print("Stay") end
+fullCollider.onColOut = function() print("Out") end
+
 local footCollider = newCollider(sarnenta,
     "rectangle",
-    sarnenta.sprite.image:getWidth(),        -- WIDTH
-    10,                                      -- HEIGHT 
-    sarnenta.sprite.image:getWidth()/2 * -1, -- X OFFSET
-    sarnenta.sprite.image:getHeight()/2      -- Y OFFSET   
+    sarnenta.sprite.image:getWidth() -10,       -- WIDTH
+    10,                                         -- HEIGHT 
+    sarnenta.sprite.image:getWidth()/2 *-1 + 5, -- X OFFSET
+    sarnenta.sprite.image:getHeight()/2 - 8     -- Y OFFSET   
 )
+
 
 -- INSERTING COMPONENTS
 sarnenta:addComponent(animator)
@@ -104,8 +109,6 @@ sarnenta.selfDraw = function(self, mode)
         ternary(sarnenta.sprite.flipX, -1, 1),
         ternary(sarnenta.sprite.flipY, -1, 1)       
     )
-
-    love.graphics.circle("fill", sarnenta.transform.x, sarnenta.transform.y, 4)
 
     if drawColliders then
     end

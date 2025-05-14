@@ -1,3 +1,5 @@
+require("test")
+
 require("objects/game")
 require("objects/sarnenta")
 
@@ -14,6 +16,7 @@ pec = {}
 function love.load()
 	-- love.audio.play(audio1)
 	addGameObject(sarnenta)
+	addGameObject(dummy)
 end
 
 function love.update(deltaTime)

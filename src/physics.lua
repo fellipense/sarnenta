@@ -1,42 +1,69 @@
 require("functions")
 
--- Circle to circle collision
-function checkCircToCircCol(a, b)
+function checkCol(a, b)
+    --print(a.type .. " VS " .. b.type)
 
-    return (a.globalX - b.globalX)^2 + 
-        (a.globalY - b.globalY)^2 < 
-        (a.radius + b.radius)^2
-end
+    -- Circle to circle collision
+    if a.type == "circle" and b.type == "circle" then
 
--- Circle to rectangle collision
-function checkCircToRecCol(a, b)
+        return (a.globalX - b.globalX)^2 + 
+            (a.globalY - b.globalY)^2 < 
+            (a.radius + b.radius)^2
+    end
 
-    local closerPoint = {} --BETWEEN THE CIRCLE AND RECTANGLE
+    -- Circle to rectangle collision
+    if a.type == "circle" and b.type == "rectangle" then
 
-    closerPoint.x = clamp(
-        b.globalX,
-        b.globalX + b.width,
-        a.globalX
-    )
+        local closerPoint = {} --BETWEEN THE CIRCLE AND RECTANGLE
 
-    closerPoint.y = clamp(
-        b.globalY,
-        b.globalY + b.height,
-        a.globalY
-    )
+        closerPoint.x = clamp(
+            b.globalX,
+            b.globalX + b.width,
+            a.globalX
+        )
 
-    return (a.globalX - closerPoint.x)^2 + 
-        (a.globalY - closerPoint.y)^2 < 
-        (a.radius)^2
-end
+        closerPoint.y = clamp(
+            b.globalY,
+            b.globalY + b.height,
+            a.globalY
+        )
 
--- Rectangle to rectangle collision
-function checkRecToRecCol(a, b)
+        return (a.globalX - closerPoint.x)^2 + 
+            (a.globalY - closerPoint.y)^2 < 
+            (a.radius)^2
+    end
 
-    return a.globalY < b.globalY + b.height
-        and a.globalX + a.width > b.globalX
-        and a.globalY + a.height > b.globalY
-        and a.globalX < b.globalX + b.width
+    -- Rectangle to circle collision
+    if a.type == "rectangle" and b.type == "circle" then
+
+        local closerPoint = {} --BETWEEN THE CIRCLE AND RECTANGLE
+
+        closerPoint.x = clamp(
+            a.globalX,
+            a.globalX + a.width,
+            b.globalX
+        )
+
+        closerPoint.y = clamp(
+            a.globalY,
+            a.globalY + a.height,
+            b.globalY
+        )
+
+        return (b.globalX - closerPoint.x)^2 + 
+            (b.globalY - closerPoint.y)^2 < 
+            (b.radius)^2
+    end
+
+
+    -- Rectangle to rectangle collision
+    if b.type == "rectangle" and a.type == "rectangle" then
+
+        return b.globalY < a.globalY + a.height
+            and b.globalX + b.width > a.globalX
+            and b.globalY + b.height > a.globalY
+            and b.globalX < a.globalX + a.width
+    end
 end
 
 -- Circle to boundary collision

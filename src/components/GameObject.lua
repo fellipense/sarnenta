@@ -1,4 +1,6 @@
 require("components/Transform")
+require("objects/game")
+
 function newGameObject(name, x, y, z, r, size)
     
     local gameObject = {}
@@ -17,7 +19,6 @@ function newGameObject(name, x, y, z, r, size)
 
     gameObject.update = function(self, deltaTime)
         for i,c in ipairs(self.components) do
-            print("updating" .. c.name)
             c:update(deltaTime)
         end
     end

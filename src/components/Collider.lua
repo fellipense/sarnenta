@@ -7,6 +7,7 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
     local collider = newComponent("collider")
 
     collider.parent = parent
+    collider.type = type
     collider.xOffset = xOffset or 0
     collider.yOffset = yOffset or 0
     collider.z = z or parent.transform.z
@@ -33,7 +34,7 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
         love.graphics.setColor(0, 1, 0)
 
-        if type == "rectangle" then
+        if self.type == "rectangle" then
             love.graphics.rectangle(mode or "line", 
                 self.globalX,
                 self.globalY, 
@@ -42,7 +43,7 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
             )
         end
 
-        if type == "circle" then
+        if self.type == "circle" then
             love.graphics.circle(mode or "line", 
                 self.globalX,
                 self.globalY, 
@@ -80,77 +81,67 @@ function newCollider(parent, type, width, height, xOffset, yOffset, z)
 
     collider.update = function(self, deltaTime)
 
-        -- EACH COLLISIONS
-        for i,c in ipairs(self.collisions) do
-        
-        end
-
         -- EACH GAMEOBJECTS
         for i,o in ipairs(gameObjects) do
 
             -- EACH COMPONENTS
             for j,c in ipairs(o.components) do
 
-                -- THAT ARE COLLIDERS
-                if c.name == "component:collider" then
+                -- THIS IS NOT A COLLIDER
+                if c.name ~= "component:collider" then goto NOTCOLLISOR end
 
-                    -- RECTANGLE TO RECTANGLE
-                    if self.type == "rectangle" 
-                    and c.type == "rectangle" 
-                    and checkRecToRecCol(self, c) then
+                -- EACH COLLISION
+                for k,l in ipairs(self.collisions) do
 
-                        -- EACH COLLISIONS
-                        for k,l in ipairs(self.collisions) do
-                            if l.target == c then
-                                if l.state == 0 then l.state = 1 end
-                                if l.state == 3 then table.remove(self.collisions, k) end
-                                goto COLLIDED
-                            end
-                        end
-                        table.insert(newCollision(c, 0))
-                        ::COLLIDED::
+                    -- Only colliders there are in some collision with me
+                    if l.target ~= c then goto NOTTARGET end
+
+                    -- They entered collision
+                    if l.state == 0 then 
+                        if checkCol(self, c) then l.state = 1
+                        else l.state = 2 end                        
+
+                    -- They are in the collision 
+                    elseif l.state == 1 then
+                        if checkCol(self, c) then l.state = 1
+                        else l.state = 2 end                        
+
+                    -- They left collision 
+                    elseif l.state == 2 then
+                        if checkCol(self, c) then l.state = 0
+                        else table.remove(self.collisions, k) end
+
                     end
 
-                    -- CIRCLE TO RECTANGLE
-                    if self.type == "circle" 
-                    and c.type == "rectangle" 
-                    and checkCircToRecCol(self, c) then
+                    goto FOUND
 
-                        -- EACH COLLISIONS
-                        for k,l in ipairs(self.collisions) do
-                            if l.target == c then
-                                if l.state == 0 then l.state = 1 end
-                                if l.state == 3 then table.remove(self.collisions, k) end
-                                goto COLLIDED
-                            end
-                        end
-                        table.insert(newCollision(c, 0))
-                        ::COLLIDED::
-                    end
-
-                    -- CIRCLE TO CIRCLE
-                    if self.type == "circle" 
-                    and c.type == "cirlce" 
-                    and checkCircToCircCol(self, c) then
-
-                        -- EACH COLLISIONS
-                        for k,l in ipairs(self.collisions) do
-                            if l.target == c then
-                                if l.state == 0 then l.state = 1 end
-                                if l.state == 3 then table.remove(self.collisions, k) end
-                                goto COLLIDED
-                            end
-                        end
-                        table.insert(newCollision(c, 0))
-                        ::COLLIDED::
-                    end
+                    ::NOTTARGET::
                 end
+
+                -- Never collided before? So create a new collision
+                if checkCol(self, c) then
+                    print("a")
+                    self:addCol(newCollision(c, 0))
+                end
+
+                ::FOUND::
+                ::NOTCOLLISOR::
             end
+        end
+
+        for i,c in ipairs(self.collisions) do
+
+            if c.state == 0 then addPhysicEvent(self.onColEnter) end
+            if c.state == 1 then addPhysicEvent(self.onColStay) end
+            if c.state == 2 then addPhysicEvent(self.onColOut) end
         end
 
         -- DEFINING IT'S POSITION
         self.globalX = parent.transform.x + collider.xOffset
         self.globalY = parent.transform.y + collider.yOffset
     end
+
+    collider.addCol = function(self, collision) table.insert(self.collisions, collision) end
+
     return collider
 end

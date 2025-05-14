@@ -1,4 +1,5 @@
 require("functions")
+require("components/Component")
 
 function newSprite(imagePath, s, x, y, r)
 

@@ -1,3 +1,5 @@
+require("components/Component")
+
 function newScript(updateScript)
 
     local script = newComponent("script")

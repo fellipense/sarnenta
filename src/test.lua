@@ -1,0 +1,6 @@
+require("components/GameObject")
+require("components/Collider")
+require("physics")
+dummy = newGameObject("dummy", 300, 450)
+dummyCollider = newCollider(dummy, "rectangle", 100, 100)
+dummy:addComponent(dummyCollider)
