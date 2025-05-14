@@ -36,10 +36,6 @@ local fullCollider = newCollider(sarnenta,
     sarnenta.sprite.image:getHeight()/2 * -1 -- Y OFFSET   
 )
 
-fullCollider.onColEnter = function() print("Enter") end
---fullCollider.onColStay = function() print("Stay") end
-fullCollider.onColOut = function() print("Out") end
-
 local footCollider = newCollider(sarnenta,
     "rectangle",
     sarnenta.sprite.image:getWidth() -10,       -- WIDTH
